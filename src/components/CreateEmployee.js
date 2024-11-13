@@ -3,10 +3,10 @@ import { useDispatch } from 'react-redux';
 import { addItemToDB } from '../features/Slice';
 import db from "../data/db";
 import Header from "./Header";
+import DatePicker from './DatePicker';
 import close from "../assets/close.svg";
 
 function CreateEmployee() {
-
   const dispatch = useDispatch();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,9 +21,8 @@ function CreateEmployee() {
   const [itemDepartment, setItemDepartment] = useState('');
 
   const handleAddItem = async (e) => {
-
     e.preventDefault();
-    
+
     const newItem = {
       firstName: itemFirstName,
       lastName: itemLastName,
@@ -33,13 +32,17 @@ function CreateEmployee() {
       city: itemCity,
       state: itemState,
       zipCode: itemZipCode,
-      department: itemDepartment
+      department: itemDepartment,
     };
 
     const id = await db.items.add(newItem);
-
     dispatch(addItemToDB({ ...newItem, id }));
 
+    setIsModalOpen(true);
+    resetForm();
+  };
+
+  const resetForm = () => {
     setItemFirstName('');
     setItemLastName('');
     setItemBirthday('');
@@ -49,8 +52,6 @@ function CreateEmployee() {
     setItemState('');
     setItemZipCode('');
     setItemDepartment('');
-
-    setIsModalOpen(true);
   };
 
   const closeModal = () => {
@@ -64,7 +65,7 @@ function CreateEmployee() {
       <main>
         <h1>Create a new employee</h1>
 
-        <form>
+        <form onSubmit={handleAddItem}>
           <div>
             <label htmlFor="firstname">First Name</label>
             <input type="text" id="firstname" required onChange={(e) => setItemFirstName(e.target.value)} />
@@ -73,14 +74,18 @@ function CreateEmployee() {
             <label htmlFor="lastname">Last Name</label>
             <input type="text" id="lastname" required onChange={(e) => setItemLastName(e.target.value)} />
           </div>
-          <div>
-            <label htmlFor="birthday">Date of Birth</label>
-            <input type="date" id="birthday" required onChange={(e) => setItemBirthday(e.target.value)} />
-          </div>
-          <div>
-            <label htmlFor="startDate">Start Date</label>
-            <input type="date" id="startDate" required onChange={(e) => setItemStartDate(e.target.value)} />
-          </div>
+          <DatePicker
+            id="birthday"
+            label="Date of Birth"
+            value={itemBirthday}
+            onDateChange={setItemBirthday}
+          />
+          <DatePicker
+            id="startDate"
+            label="Start Date"
+            value={itemStartDate}
+            onDateChange={setItemStartDate}
+          />
           <div className="address">
             <p>Address</p>
             <div>
@@ -162,19 +167,19 @@ function CreateEmployee() {
               <option value="human-resources">Legal</option>
             </select>
           </div>
-          <button type="submit" onClick={handleAddItem}>Save</button>
+          <button type="submit">Save</button>
         </form>
         {isModalOpen && (
           <div className="modal">
             <div className="modal__content">
               <img src={close} alt="Close icon" onClick={closeModal} />
-              <p>Employee created !</p>
+              <p>Employee created!</p>
             </div>
           </div>
         )}
       </main>
     </>
-  )
+  );
 }
 
 export default CreateEmployee;
