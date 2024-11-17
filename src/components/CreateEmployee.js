@@ -4,7 +4,8 @@ import { addItemToDB } from '../features/Slice';
 import db from "../data/db";
 import Header from "./Header";
 import DatePicker from './DatePicker';
-import close from "../assets/close.svg";
+import Dropdown from "./Dropdown";
+import Modal from "./Modal";
 
 function CreateEmployee() {
   const dispatch = useDispatch();
@@ -19,6 +20,65 @@ function CreateEmployee() {
   const [itemState, setItemState] = useState('');
   const [itemZipCode, setItemZipCode] = useState('');
   const [itemDepartment, setItemDepartment] = useState('');
+  const stateOption = [
+    'Alabama',
+    'Alaska',
+    'Arizona',
+    'Arkansas',
+    'California',
+    'Colorado',
+    'Connecticut',
+    'Delaware',
+    'Florida',
+    'Georgia',
+    'Hawaii',
+    'Idaho',
+    'Illinois',
+    'Indiana',
+    'Iowa',
+    'Kansas',
+    'Kentucky',
+    'Louisiana',
+    'Maine',
+    'Maryland',
+    'Massachusetts',
+    'Michigan',
+    'Minnesota',
+    'Mississippi',
+    'Missouri',
+    'Montana',
+    'Nebraska',
+    'Nevada',
+    'New Hampshire',
+    'New Jersey',
+    'New Mexico',
+    'New York',
+    'North Carolina',
+    'North Dakota',
+    'Ohio',
+    'Oklahoma',
+    'Oregon',
+    'Pennsylvania',
+    'Rhode Island',
+    'South Carolina',
+    'South Dakota',
+    'Tennessee',
+    'Texas',
+    'Utah',
+    'Vermont',
+    'Virginia',
+    'Washington',
+    'West Virginia',
+    'Wisconsin',
+    'Wyoming',
+  ]
+  const departmentOption = [
+    'Sales',
+    'Marketing',
+    'Engineering',
+    'Human Resources',
+    'Legal',
+  ]
 
   const handleAddItem = async (e) => {
     e.preventDefault();
@@ -96,87 +156,16 @@ function CreateEmployee() {
               <label htmlFor="city">City</label>
               <input type="text" id="city" required onChange={(e) => setItemCity(e.target.value)} />
             </div>
-            <div>
-              <label htmlFor="state">State</label>
-              <select id="state" name="state" required onChange={(e) => setItemState(e.target.value)}>
-                <option value="Alabama" defaultValue={true}>Alabama</option>
-                <option value="Alaska">Alaska</option>
-                <option value="Arizona">Arizona</option>
-                <option value="Arkansas">Arkansas</option>
-                <option value="California">California</option>
-                <option value="Colorado">Colorado</option>
-                <option value="Connecticut">Connecticut</option>
-                <option value="Delaware">Delaware</option>
-                <option value="District Of Columbia">District Of Columbia</option>
-                <option value="Florida">Florida</option>
-                <option value="Georgia">Georgia</option>
-                <option value="Hawaii">Hawaii</option>
-                <option value="Idaho">Idaho</option>
-                <option value="Illinois">Illinois</option>
-                <option value="Indiana">Indiana</option>
-                <option value="Iowa">Iowa</option>
-                <option value="Kansas">Kansas</option>
-                <option value="Kentucky">Kentucky</option>
-                <option value="Louisiana">Louisiana</option>
-                <option value="Maine">Maine</option>
-                <option value="Maryland">Maryland</option>
-                <option value="Massachusetts">Massachusetts</option>
-                <option value="Michigan">Michigan</option>
-                <option value="Minnesota">Minnesota</option>
-                <option value="Mississippi">Mississippi</option>
-                <option value="Missouri">Missouri</option>
-                <option value="Montana">Montana</option>
-                <option value="Nebraska">Nebraska</option>
-                <option value="Nevada">Nevada</option>
-                <option value="New Hampshire">New Hampshire</option>
-                <option value="New Jersey">New Jersey</option>
-                <option value="New Mexico">New Mexico</option>
-                <option value="New York">New York</option>
-                <option value="North Carolina">North Carolina</option>
-                <option value="North Dakota">North Dakota</option>
-                <option value="Ohio">Ohio</option>
-                <option value="Oklahoma">Oklahoma</option>
-                <option value="Oregon">Oregon</option>
-                <option value="Pennsylvania">Pennsylvania</option>
-                <option value="Rhode Island">Rhode Island</option>
-                <option value="South Carolina">South Carolina</option>
-                <option value="South Dakota">South Dakota</option>
-                <option value="Tennessee">Tennessee</option>
-                <option value="Texas">Texas</option>
-                <option value="Utah">Utah</option>
-                <option value="Vermont">Vermont</option>
-                <option value="Virginia">Virginia</option>
-                <option value="Washington">Washington</option>
-                <option value="West Virginia">West Virginia</option>
-                <option value="Wisconsin">Wisconsin</option>
-                <option value="Wyoming">Wyoming</option>
-              </select>
-            </div>
+            <Dropdown options={stateOption} label="State" onSelect={(option) => setItemState(option)} />
             <div>
               <label htmlFor="zip">Zip Code</label>
               <input type="number" min={1} max={99999} step={1} id="zip" required onChange={(e) => setItemZipCode(e.target.value)} />
             </div>
           </div>
-          <div>
-            <label htmlFor="department">Department</label>
-            <select id="department" name="department" required onChange={(e) => setItemDepartment(e.target.value)}>
-              <option value="sales" defaultValue={true}>Sales</option>
-              <option value="marketing">Marketing</option>
-              <option value="engineering">Engineering</option>
-              <option value="human-resources">Human Resources</option>
-              <option value="human-resources">Legal</option>
-            </select>
-          </div>
+          <Dropdown options={departmentOption} label="Department" onSelect={(option) => setItemDepartment(option)} />
           <button type="submit">Save</button>
         </form>
-        {isModalOpen && (
-          <div className="modal">
-            <div className="modal__content">
-              <img src={close} alt="Close icon" onClick={closeModal} />
-              <p>Employee created!</p>
-            </div>
-          </div>
-        )}
+        <Modal isOpen={isModalOpen} onClose={closeModal} children={<p>Employee created!</p>} />
       </main>
     </>
   );

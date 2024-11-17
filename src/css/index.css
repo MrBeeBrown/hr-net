@@ -1,39 +1,27 @@
 :root {
-  /*-----------[Colors]-----------*/
   --color-green-color: #5A6F07;
   --color-light-color: #E9F0CC;
   --color-extra-light-color: #eef3dc;
   --color-white-color: #ffffff;
-
-  /*-----------[Font Sizes]-----------*/
-  /* Display Sizes */
   --display-119: 7.438rem;
   --display-95: 5.938rem;
   --display-76: 4.75rem;
   --display-76: 4.75rem;
   --display-61: 3.812rem;
-
-  /* Heading Sizes */
   --heading-49: 3.062rem;
   --heading-39: 2.438rem;
   --heading-31: 1.938rem;
   --heading-25: 1.562rem;
   --heading-20: 1.25rem;
   --heading-16: 1rem;
-
-  /* Body */
   --body-20: 1.25rem;
   --body-18: 1.125rem;
   --body-16: 1rem;
-
-  /* Button */
   --button-20: 1.25rem;
   --button-18: 1.125rem;
   --button-16: 1rem;
-
-  /* Details */
-  --details-13: 0.812rem;
-  --details-10: 0.625rem;
+  --details-13: .812rem;
+  --details-10: .625rem;
 }
 
 *, *::before, *::after {
@@ -120,7 +108,7 @@ h1, h2, h3, h4, h5, h6 {
 .header__menu__create {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: .5rem;
   padding: .5rem 1rem;
   border: var(--color-green-color) 2px solid;
   border-radius: 3px;
@@ -134,7 +122,7 @@ h1, h2, h3, h4, h5, h6 {
 .header__menu__list {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: .5rem;
   padding: .5rem 1rem;
   border: var(--color-green-color) 2px solid;
   border-radius: 3px;
@@ -185,7 +173,7 @@ form div {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: 0.5rem;
+  gap: .5rem;
   width: 100%;
 }
 
@@ -242,6 +230,55 @@ form button {
 .address p {
   font-family: "Montserrat-Bold", sans-serif;
   font-size: var(--body-18);
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.dropdown-label {
+  font-size: 14px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.dropdown-header {
+  padding: 10px;
+  border: var(--color-green-color) 1px solid;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.dropdown-header:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdown-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 5px;
+  z-index: 1000;
+  list-style: none;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.dropdown-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #f0f0f0;
 }
 
 .select__filter {
@@ -318,7 +355,7 @@ main a {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: hsla(72, 55%, 87%, 0.75);
+  background-color: hsla(72, 55%, 87%, .75);
   display: flex;
   justify-content: center;
   align-items: center;
