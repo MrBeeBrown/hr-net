@@ -337,6 +337,11 @@ thead {
   font-family: "Montserrat-Bold", sans-serif;
 }
 
+th {
+  text-align: left;
+  border-bottom: 1px solid var(--color-green-color);
+}
+
 main a {
   color: var(--color-green-color);
   text-decoration: none;
