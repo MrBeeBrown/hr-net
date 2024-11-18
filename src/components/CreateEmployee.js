@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { addItemToDB } from '../features/Slice';
 import db from "../data/db";
 import Header from "./Header";
-import DatePicker from './DatePicker';
+import { DatePicker } from 'datepicker-input-component-library';
 import Dropdown from "./Dropdown";
 import Modal from "./Modal";
 

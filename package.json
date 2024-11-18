@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.3.0",
+    "datepicker-input-component-library": "^1.0.1",
     "dexie": "^4.0.9",
     "pikaday": "^1.8.2",
     "react": "^18.3.1",
